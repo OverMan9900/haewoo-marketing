@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>해우 울산점 마케팅 운영맵</title>
+<style>
+:root{
+  --bg:#f4f6f8; --card:#fff; --ink:#15171a; --muted:#667085; --line:#e7eaee;
+  --naver:#03c75a; --kakao:#fee500; --daangn:#ff6f0f; --red:#d92d20;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.sidebar{
+  position:sticky;top:0;height:100vh;background:#111316;color:#fff;padding:24px 18px;overflow:auto
+}
+.logo{font-size:22px;font-weight:900;letter-spacing:-.04em;margin-bottom:6px}
+.logo small{display:block;font-size:11px;color:#959ca6;font-weight:600;margin-top:4px;letter-spacing:0}
+.menu-title{font-size:11px;color:#747b85;font-weight:800;letter-spacing:.12em;margin:24px 10px 8px}
+.navbtn{
+  width:100%;border:0;background:transparent;color:#d7dbe0;text-align:left;
+  padding:11px 12px;border-radius:10px;cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:center
+}
+.navbtn:hover,.navbtn.active{background:#20242a;color:#fff}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.naver{background:var(--naver)} .dot.kakao{background:var(--kakao)}
+.dot.daangn{background:var(--daangn)} .dot.gray{background:#9299a3}
+.main{padding:30px 32px 80px;max-width:1500px;width:100%}
+.page{display:none}.page.active{display:block}
+.hero{
+  background:linear-gradient(135deg,#111 0%,#262a30 100%);color:#fff;
+  padding:34px;border-radius:24px;box-shadow:0 14px 34px rgba(0,0,0,.12);margin-bottom:24px
+}
+.hero h1{font-size:36px;line-height:1.15;letter-spacing:-.05em;margin:0 0 12px}
+.hero p{color:#cfd4da;max-width:920px;margin:0}
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.platform-card{
+  border:1px solid var(--line);background:#fff;border-radius:18px;padding:22px;cursor:pointer;
+  transition:.18s;min-height:140px
+}
+.platform-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(16,24,40,.08)}
+.platform-card h3{margin:0 0 8px;font-size:22px}
+.platform-card p{font-size:13px;color:var(--muted);margin:0}
+.platform-card.naver{border-top:7px solid var(--naver)}
+.platform-card.kakao{border-top:7px solid var(--kakao)}
+.platform-card.daangn{border-top:7px solid var(--daangn)}
+.platform-card.instagram{border-top:7px solid transparent;border-image:linear-gradient(90deg,#833ab4,#fd1d1d,#fcaf45) 1}
+.platform-card.google{border-top:7px solid transparent;border-image:linear-gradient(90deg,#4285f4,#ea4335,#fbbc05,#34a853) 1}
+.platform-card.reserve{border-top:7px solid #d92d20}
+.platform-card.third{grid-column:span 3;background:#fafafa}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px
+}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--naver)}
+.title{font-size:34px;margin:3px 0 0;letter-spacing:-.05em}
+.back{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}
+.ladder{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0 24px
+}
+.step{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;min-height:125px
+}
+.step.active{border:2px solid var(--naver);box-shadow:0 6px 20px rgba(3,199,90,.08)}
+.step .num{font-size:11px;color:var(--muted);font-weight:900}
+.step h3{font-size:18px;margin:6px 0 6px}
+.step p{font-size:12px;color:var(--muted);margin:0}
+.panel{display:none}.panel.active{display:block}
+.section-card{
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;margin-bottom:16px
+}
+.section-card h2{margin:0 0 8px;font-size:24px;letter-spacing:-.04em}
+.section-card h3{margin:20px 0 8px;font-size:17px}
+.section-card p{color:#46505c}
+.quote{
+  margin:16px 0;padding:16px 18px;border-left:5px solid var(--naver);background:#f2fff7;border-radius:12px;
+  font-weight:800
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.metric{
+  border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfcfd
+}
+.metric .label{font-size:12px;color:var(--muted);font-weight:800}
+.metric .value{font-size:24px;font-weight:900;margin-top:5px}
+.table{width:100%;border-collapse:collapse;margin-top:10px}
+.table th,.table td{border-bottom:1px solid var(--line);padding:11px 10px;text-align:left;font-size:13px}
+.table th{color:#667085;background:#fafafa}
+.question-list{padding-left:20px}
+.question-list li{margin:10px 0}
+.logic{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0
+}
+.logic div{background:#f6f8fa;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:12px}
+.logic b{display:block;font-size:16px;margin-bottom:4px}
+.note{
+  border:1px dashed #b8c0ca;background:#fbfcfd;border-radius:14px;padding:14px 16px;color:#475467;font-size:13px
+}
+.todo{
+  background:#111;color:#fff;border-radius:18px;padding:20px;margin-top:16px
+}
+.todo h3{margin:0 0 8px}.todo p{color:#c9ced6;margin:0}
+.placeholder{padding:50px;background:#fff;border:1px solid var(--line);border-radius:22px;text-align:center;color:#667085}
+@media(max-width:1100px){
+  .app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.main{padding:20px}
+  .platform-grid{grid-template-columns:1fr 1fr}.platform-card.third{grid-column:span 2}
+  .ladder{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.logic{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .platform-grid{grid-template-columns:1fr}.platform-card.third{grid-column:span 1}
+  .hero h1{font-size:28px}
+}
+
+.resolved-item{
+  border:1px solid #cfe9d8;background:#f4fff7;border-radius:14px;padding:14px 15px;margin:12px 0;
+}
+.resolved-head{
+  display:flex;align-items:center;gap:10px;justify-content:space-between;
+}
+.resolved-left{display:flex;align-items:flex-start;gap:10px}
+.checkbtn{
+  width:26px;height:26px;border-radius:8px;border:1px solid #98d5ae;background:#fff;
+  display:grid;place-items:center;cursor:pointer;font-weight:900;color:#03c75a;flex:none;
+}
+.checkbtn.done{background:#03c75a;color:#fff;border-color:#03c75a}
+.status-badge{
+  font-size:11px;font-weight:900;padding:5px 8px;border-radius:999px;background:#dff7e7;color:#087a35;
+}
+.resolved-body{margin-top:10px;font-size:13px;color:#475467}
+.resolved-item.collapsed .resolved-body{display:none}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">해우 마케팅 운영맵<small>플랫폼별 질문 / 사다리 단계 / 운영 논리</small></div>
+
+    <div class="menu-title">HOME</div>
+    <button class="navbtn active" data-page="home">전체 목차</button>
+
+    <div class="menu-title">PLATFORMS</div>
+    <button class="navbtn" data-page="naver"><span class="dot naver"></span>1. 네이버</button>
+    <button class="navbtn" data-page="kakao"><span class="dot kakao"></span>2. 카카오</button>
+    <button class="navbtn" data-page="daangn"><span class="dot daangn"></span>3. 당근</button>
+    <button class="navbtn" data-page="google"><span class="dot gray"></span>4. 구글</button>
+    <button class="navbtn" data-page="instagram"><span class="dot gray"></span>5. 인스타그램</button>
+    <button class="navbtn" data-page="reserve"><span class="dot gray"></span>6. 캐치테이블 / 테이블링</button>
+    <button class="navbtn" data-page="third"><span class="dot gray"></span>7. 티맵 / 다이닝코드 / 식신 / 뽈레</button>
+  </aside>
+
+  <main class="main">
+    <section id="home" class="page active">
+      <div class="hero">
+        <h1>해우 울산점<br/>플랫폼별 마케팅 사다리</h1>
+        <p>
+          광고비를 1원이라도 더 확보하고, 그 재원을 어디에 얼마만큼 배분해야 하는지,
+          각 플랫폼에서 어느 단계가 병목인지 질문하고 검증하기 위한 운영 홈페이지.
+        </p>
+      </div>
+
+      <div class="platform-grid">
+        <div class="platform-card naver" data-go="naver"><h3>1. 네이버</h3><p>플레이스 · 지역소상공인 · 파워링크 · SEO · 예약</p></div>
+        <div class="platform-card kakao" data-go="kakao"><h3>2. 카카오</h3><p>우리매장 알리기 · 카카오모먼트 · 지도 · 예약</p></div>
+        <div class="platform-card daangn" data-go="daangn"><h3>3. 당근</h3><p>전문가 광고 · 영상소재 · 지역타게팅 · 리뷰</p></div>
+        <div class="platform-card google" data-go="google"><h3>4. Google</h3><p>Google Maps · Business Profile · 외지인 수요</p></div>
+        <div class="platform-card instagram" data-go="instagram"><h3>5. Instagram</h3><p>릴스 · 체험단 · 숏폼 · 저장/공유 · UGC</p></div>
+        <div class="platform-card reserve" data-go="reserve"><h3>6. 캐치테이블 / 테이블링</h3><p>예약의도형 고전환 플랫폼</p></div>
+        <div class="platform-card third" data-go="third"><h3>7. 티맵 / 다이닝코드 / 식신 / 뽈레</h3><p>보조 탐색채널. 최소 자원으로 유지하고 실질 전환만 추적.</p></div>
+      </div>
+    </section>
+
+    <section id="naver" class="page">
+      <div class="topbar">
+        <div>
+          <div class="eyebrow">PLATFORM 01</div>
+          <h1 class="title">네이버</h1>
+        </div>
+        <button class="back" data-go="home">← 전체 목차</button>
+      </div>
+
+      <div class="ladder">
+        <div class="step active" data-step="exposure"><div class="num">STEP 1</div><h3>노출</h3><p>재원 · 자동결제 · 입찰가 · 지역타게팅</p></div>
+        <div class="step" data-step="curiosity"><div class="num">STEP 2</div><h3>호기심 유발</h3><p>사진 · 숏폼 · 카피 · CTR</p></div>
+        <div class="step" data-step="immersion"><div class="num">STEP 3</div><h3>몰입</h3><p>랜딩페이지 · SEO · 상세설명 · 소식</p></div>
+        <div class="step" data-step="trust"><div class="num">STEP 4</div><h3>의심 해소</h3><p>리뷰 · 별점 · 신뢰 · 답글</p></div>
+        <div class="step" data-step="cart"><div class="num">STEP 5</div><h3>장바구니</h3><p>예약 · 전화 · 저장 · 길찾기</p></div>
+      </div>
+
+      <div id="exposure" class="panel active">
+        <div class="section-card">
+          <h2>1. 노출 — 광고비가 실제 노출로 바뀌는 구조</h2>
+          <div class="quote">
+            비용 1원이라도 더 긁어오는 것은 점주의 몫.  
+            대행사는 확보된 재원이 끊기지 않고, 막히지 않고, 낭비되지 않게 세팅해야 한다.
+          </div>
+
+          <div class="grid2">
+            <div class="metric"><div class="label">현재 네이버 월 광고재원 목표</div><div class="value">900,000원</div></div>
+            <div class="metric"><div class="label">운영 핵심</div><div class="value">Floor · Headroom · Cap</div></div>
+          </div>
+
+          <h3>자동결제 시스템 — 핵심 질문</h3>
+          <ul class="question-list">
+            <li><b>Floor:</b> 비즈머니 부족으로 단 하루도 광고가 꺼지지 않도록 잔액기준 / 1회충전 / 일충전한도를 어떻게 잡아야 하는가?</li>
+            <li><b>Headroom:</b> 주말이나 검색수요가 튀는 날 충전 리미트 때문에 추가 노출이 막히지 않는 구조인가?</li>
+            <li><b>Cap:</b> 월 광고비 90만원은 넘지 않되 월초 잔액까지 포함해 실사용액을 어떻게 통제할 것인가?</li>
+            <li>자동충전 한도와 실제 광고비 사용한도를 어떻게 분리해서 관리할 것인가?</li>
+            <li>카드 한도 / 자동충전 실패 / 월말 잔액 부족 같은 운영 리스크를 어떤 안전장치로 막을 것인가?</li>
+          </ul>
+
+          <h3>현재 입찰 구조</h3>
+          <table class="table">
+            <tr><th>광고그룹</th><th>현재 기본 입찰가</th><th>의도</th></tr>
+            <tr><td>장가_메인</td><td><b>200원</b></td><td>핵심 노출 확보</td></tr>
+            <tr><td>장가_중위</td><td><b>100원</b></td><td>중간 가격대 확장</td></tr>
+            <tr><td>장가_하위</td><td><b>70원</b></td><td>저가 노출 / 롱테일 확보</td></tr>
+          </table>
+
+          <h3>입찰가 공식 — 지금 꼭 답을 받아야 하는 지점</h3>
+          <ul class="question-list">
+            <li>지역·업종 평균 입찰가 대비 몇 %를 메인/중위/하위에 배치하는 것이 합리적인가?</li>
+            <li><b>메인 200 / 중위 100 / 하위 70</b>의 비율은 어떤 공식 또는 실무 경험에서 나온 것인가?</li>
+            <li>입찰가가 올라갈수록 노출기회가 얼마나 증가하는지, 어느 구간부터는 CPC만 비싸지고 추가 노출이 거의 늘지 않는가?</li>
+            <li>CTR, 평균 CPC, 노출수, 실제 전환을 같이 봤을 때 “입찰가 최적점”을 어떤 지표 조합으로 판단할 것인가?</li>
+            <li>메인/중위/하위 그룹이 서로 잠식하지 않고 각자 다른 가격대의 트래픽을 확보하고 있는가?</li>
+            <li>장가_하위 70원이 현재 울산 북구 한식업종 평균 입찰가와 동일하거나 유사한데, 이 그룹은 어떤 노출 풀을 확보하기 위한 장치인가?</li>
+          </ul>
+
+          <div class="note">
+            <b>정리:</b> STEP 1에서는 SEO를 다루지 않는다.  
+            여기서는 순수하게 <b>돈 → 광고송출 → 노출량</b>의 구조만 본다.
+            SEO와 플랫폼 페이지 최적화는 STEP 3 ‘몰입’에서 다룬다.
+          </div>
+        </div>
+      </div>
+
+      <div id="curiosity" class="panel">
+        <div class="section-card">
+          <h2>2. 호기심 유발 — 노출된 사람을 클릭시키는 힘</h2>
+          <ul class="question-list">
+            <li>대표사진 / 광고소재 1·2·3 순서를 어떤 논리로 설계해야 하는가?</li>
+            <li>오션뷰 + 12계단 / 활어 액션 / 해물탕 액션 중 어떤 소재가 CTR을 가장 높이는가?</li>
+            <li>“12계단 한우&제철회 풀코쓰!”처럼 구체적 숫자와 강한 단어가 실제 CTR 상승으로 이어지는가?</li>
+            <li>평범한 카피와 개성 강한 카피를 같은 기간 A/B 테스트할 수 있는가?</li>
+            <li>소재 피로도와 CTR 하락을 어떤 기간 단위로 판단하고 교체해야 하는가?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="immersion" class="panel">
+        <div class="section-card">
+          <h2>3. 몰입 — 랜딩페이지 개선 + 플랫폼 SEO 최적화</h2>
+          <div class="quote">
+            광고를 눌러 들어온 뒤부터는 “플레이스 자체가 홈페이지”다.  
+            SEO 세팅과 랜딩페이지 개선은 같은 단계에서 본다.
+          </div>
+
+          
+<div class="resolved-item collapsed" data-resolved-id="naver-seo-english-name">
+  <div class="resolved-head">
+    <div class="resolved-left">
+      <button class="checkbtn done" type="button" aria-label="해결됨 체크">✓</button>
+      <div>
+        <b>해결된 질문 01 — 영문 업체명 90자 지면을 SEO 키워드로 활용할 수 있는가?</b>
+        <div style="font-size:12px;color:#667085;margin-top:3px">
+          업체정보 수정 → 기본정보 → 사업자 정보 → 영문 업체명
+        </div>
+      </div>
+    </div>
+    <span class="status-badge">해결완료</span>
+  </div>
+  <div class="resolved-body">
+    <b>질문:</b> ‘해우 울산점’을 영문으로 입력할 때 <b>Haewoo Ulsan</b>만 쓰는 대신,
+    Ulsan / Buk-gu / Gangdong 같은 지역 키워드를 90자 안에 최대한 채우는 것이
+    네이버 SEO 노출에 유의미한가?<br><br>
+    <b>결론:</b> <b>SEO 용도로는 아무짝에도 쓸모없는 지면.</b>
+    이 칸은 검색 키워드를 확장하는 공간이 아니라 <b>국문 업체명을 영어로 정확히 옮겨 적는 용도</b>로 보면 된다.
+    따라서 <b>Gangdong, Buk-gu 같은 지역 키워드를 추가해 90자를 최대한 채우려는 시도는 무의미</b>하다.
+    <br><br>
+    <b>정답:</b> ‘해우 울산점’의 자연스러운 영문 상호만 기입.
+    <br>
+    <b>하지 않을 것:</b> Haewoo Gangdong Ulsan Branch / Haewoo Gangdong Buk-gu Ulsan Branch 등 SEO 목적 지역명 추가.
+  </div>
+</div>
+
+<h3>대표키워드 A/B/C/D/E 로직</h3>
+
+          <p>현재 대표키워드는 최대 15자 × 5개. 총 75자의 매우 제한된 지면으로 본다.</p>
+
+          <div class="logic">
+            <div><b>A</b>메뉴/음식<br/>초밥, 회, 해물탕 등</div>
+            <div><b>B</b>재료/품질<br/>활어, 제철회, 한우 등</div>
+            <div><b>C</b>매장 특징<br/>오션뷰, 바다전망 등</div>
+            <div><b>D</b>이용 상황<br/>가족외식, 회식, 생일 등</div>
+            <div><b>E</b>지역/지리<br/>울산, 북구, 강동 등</div>
+          </div>
+
+          <h3>대표키워드에서 답을 받아야 할 핵심</h3>
+          <ul class="question-list">
+            <li>네이버 공식 입력란에는 “단어 하나씩” 넣으라고 되어 있는데, 실제 운영에서는 15자를 꽉 채운 문장 비슷한 조합형 키워드가 아직도 유효한가?</li>
+            <li>조합형 키워드를 쓰는 이유가 실제 사측 데이터에서 확인된 것인지, 과거의 경험칙인지?</li>
+            <li>15자 안에 여러 단어를 붙였을 때 네이버가 각각을 독립 토큰으로 인식하는가, 인접 단어 조합으로도 인식하는가?</li>
+            <li>대표키워드 75자 안에서 <b>A/B/C/D/E를 몇 %씩 배분</b>하는 게 좋은가?</li>
+            <li>연관 키워드 중에서는 검색량이 높은 단어를 우선해야 하는가? 예: ‘초밥’ vs ‘스시’.</li>
+            <li>검색량이 거의 없는 세부 지역명 ‘당사동’을 넣는 것은 낭비인가, 로컬 연관성 때문에 의미가 있는가?</li>
+            <li>지역명은 플레이스 주소정보에 이미 존재하는데 대표키워드에 또 넣는 것이 실제 노출에 도움이 되는가?</li>
+            <li>공식 가이드와 실전 데이터가 충돌할 때 무엇을 기준으로 판단하고, 어떤 테스트로 검증할 것인가?</li>
+          </ul>
+
+          <h3>상세설명 2,000자 — 후킹 / 정보밀도 / 남는 글자지면</h3>
+
+          <div class="resolved-item collapsed" data-resolved-id="naver-seo-description-hook">
+            <div class="resolved-head">
+              <div class="resolved-left">
+                <button class="checkbtn done" type="button" aria-label="해결됨 체크">✓</button>
+                <div>
+                  <b>부분 해결 — ‘더보기 아래를 키워드 문장 더미로 꽉 채우는 방식’</b>
+                  <div style="font-size:12px;color:#667085;margin-top:3px">상세설명 최대 2,000자</div>
+                </div>
+              </div>
+              <span class="status-badge">부분 해결</span>
+            </div>
+            <div class="resolved-body">
+              <b>기존 로직:</b> 더보기 전 = 후킹 / 더보기 후 = 연관 키워드가 포함된 문장 더미.<br><br>
+              <b>해결된 부분:</b> 실제 사용자가 더보기를 눌러 읽었을 때 지나치게 SEO 냄새가 나는 문장 더미는
+              가독성과 신뢰를 떨어뜨릴 수 있으므로, <b>사람이 읽어도 자연스러운 정보 구조</b>로 정리하는 방향으로 합의.<br><br>
+              <b>아직 남은 질문:</b> 현재 약 1,857자를 사용 중이라 약 <b>143자</b>가 남는다.
+              이 143자를 비워두는 것과, 실제 매장과 연관성이 높은 자연스러운 키워드·정보 문장으로 채우는 것 사이에
+              검색노출 차이가 존재하는가?
+            </div>
+          </div>
+
+          <ul class="question-list">
+            <li><b>남는 143자 자체가 ‘낭비’인가?</b> 상세설명 글자 수를 많이 채운다는 사실 자체가 SEO 가중치로 작동하는가?</li>
+            <li>글자 수 자체는 무의미하더라도, 남은 143자에 <b>실제 연관성이 높은 메뉴·상황·지역·시설 정보</b>를 자연스럽게 추가하면 검색 쿼리 매칭 범위가 넓어질 수 있는가?</li>
+            <li>현재 상단 1·2·3·4 번호형 요약은 더보기 전에 노출되는 영역의 가독성을 높이는가, 아니면 강한 한두 문장보다 오히려 시선을 분산시키는가?</li>
+            <li>‘울산맛집 / 울산횟집 / 울산북구맛집’ 같은 표현이 상세설명 안에서 반복될 때 어느 수준부터 과최적화·스팸성 문장으로 판단될 가능성이 있는가?</li>
+            <li>상세설명은 <b>검색노출용 문서</b>와 <b>랜딩페이지용 소개문</b> 중 어느 쪽 비중을 더 높여야 하는가?</li>
+          </ul>
+
+          <h3>대표키워드 75자 — 짧은 단어 2개는 정말 효율적인가?</h3>
+          <div class="note">
+            현재: <b>활어 / 오션뷰 / 울산오션뷰횟집활어회가족외식 / 울산북구숙성회물회육회코스요리 / 당사동우가항초밥해물탕해산물</b>
+          </div>
+          <ul class="question-list">
+            <li>15자씩 5칸을 사용할 수 있는데 <b>‘활어’와 ‘오션뷰’처럼 2~3자만 단독 사용</b>하는 것이 실제로 최적화된 선택인가?</li>
+            <li>조합형 키워드가 여전히 유효하다면, ‘활어’와 ‘오션뷰’도 각각 15자 가까이 관련 단어를 조합해 쓰는 편이 더 넓은 검색 조합을 확보하는가?</li>
+            <li>반대로 짧은 단어를 단독으로 두는 것이 네이버의 토큰 인식·정확도 측면에서 더 강한 신호가 되는가?</li>
+            <li>즉, <b>한 칸의 글자수를 꽉 채우는 것</b>과 <b>한 칸에 하나의 명확한 핵심개념만 두는 것</b> 중 어떤 방식이 실제 데이터상 우세한가?</li>
+          </ul>
+
+          <h3>찾아오는 길 400자 — ‘교통 정보’인가, 또 하나의 SEO 지면인가?</h3>
+          <div class="note">
+            현재 약 395자 사용. 삼산동·야음동·신정동·옥동·울산대·일산해수욕장·송정동·성남동·강동몽돌해변·정자항·주전몽돌해변에서의 차량 이동시간과
+            주차·주소·지도앱 검색 방법을 가독성 있게 정리한 상태.
+          </div>
+          <ul class="question-list">
+            <li><b>400자를 거의 꽉 채우는 것 자체가 유의미한가?</b> 아니면 ‘찾아오는 길’은 검색노출보다 실제 방문 편의성이 우선인가?</li>
+            <li>예전처럼 네이버 지도 길찾기에 나오는 <b>도로명·고속도로·몇 km 이동·우회전</b> 같은 세부 경로를 복붙하는 것이 검색노출에 조금이라도 유리한가?</li>
+            <li>현재처럼 주요 생활권·관광지별 <b>차량 소요시간</b>을 적는 것이 이용자 전환에는 더 유리한가?</li>
+            <li>삼산동, 송정동, 성남동, 주전몽돌해변 같은 지명이 이 입력란에서 실제 검색 쿼리 매칭에 활용될 수 있는가?</li>
+            <li>‘울산맛집 / 울산횟집 / 울산북구맛집 / 울산데이트맛집’ 같은 검색형 키워드를 찾아오는 길 상단·하단에 넣는 것이 의미가 있는가, 아니면 이 지면의 목적과 맞지 않아 정보 품질만 떨어뜨리는가?</li>
+            <li>결국 최적형은 <b>주소·주차 + 주요 생활권별 소요시간 + 근처 랜드마크</b> 중심인지, 아니면 실제 길찾기 경로를 더 구체적으로 복원해야 하는지?</li>
+          </ul>
+
+          <h3>소식 / 업체사진</h3>
+          <ul class="question-list">
+            <li><b>업체사진의 실질 최고 화질 기준부터 확인:</b> 네이버가 받아주는 최대 가로×세로 픽셀은 몇 px인가? 단순히 파일용량을 20MB에 가깝게 만드는 것이 의미가 있는가, 아니면 네이버 내부 리사이즈/압축 이후 체감화질이 유지되는 적정 픽셀 기준이 따로 있는가?</li>
+            <li><b>화질과 SEO를 분리해서 확인:</b> 고해상도 이미지가 고객이 보는 화질에는 도움이 되더라도, 검색노출·SEO·AI 이미지 인식에서 추가 가중치를 주는가?</li>
+            <li><b>1·2·3번 업체사진은 별도 최우선 슬롯으로 볼 것:</b> 해우 플레이스에서 ‘더보기’를 누르기 전 바로 보이는 첫 번째·두 번째·세 번째 사진은 CTR 이후 몰입을 좌우하므로, 어떤 역할로 각각 설계해야 하는가? 예: ① 12계단 대표메뉴+오션뷰 ② 오션뷰/외관 ③ 단체석 또는 해물탕 액션.</li>
+            <li>업체사진 순서가 네이버 노출 화면에서 항상 고정되는지, 노출 지면·기기·광고 여부에 따라 일부 섞이거나 다른 이미지가 끼어드는지 확인할 필요가 있는가?</li>
+            <li><b>4~120번의 존재가치:</b> 실제로 ‘더보기’를 눌러 사진을 깊게 보는 소수 고객을 위해 120장까지 채우는 것이 전환 측면에서 의미가 있는가?</li>
+            <li><b>SEO/정보충실성 측면의 4~120번:</b> 이용자가 거의 보지 않더라도 사진 수·최신성·카테고리 다양성이 네이버의 업체 정보 충실성 또는 인기도 판단에 유의미한 신호가 되는가?</li>
+            <li>120장을 채우는 것이 유의미하다면 단순 장수보다 <b>사진 카테고리의 다양성</b>(오션뷰 / 12계단 / 활어 / 해물탕 / 단체석 / 외관 / 주차 / 좌석 / 메뉴 디테일 / 계절메뉴)이 더 중요한가?</li>
+            <li>같거나 비슷한 사진을 반복해서 많이 올리는 것과, 서로 다른 정보를 담은 사진을 120장 구성하는 것 사이에 네이버 평가 및 고객 반응 차이가 있는가?</li>
+            <li>결국 업체사진 운영의 최적점은 <b>‘대표 3장 극한 최적화 + 이후 사진 충분한 다양성 확보’</b>인지, 아니면 실제로 <b>120장 풀충전</b>까지 해야 하는지 데이터로 검증할 수 있는가?</li>
+            <li>‘찾아오는 길’에 실제 도로망 거리와 접근시간을 자세히 적는 것이 SEO/전환에 도움이 되는가?</li>
+            <li>네이버 소식을 주 1회 발행하는 것이 실제 노출·신뢰도·전환에 얼마나 영향을 주는가?</li>
+            <li>SEO 수정 주기와 수정횟수 제한을 고려했을 때 테스트 단위를 어떻게 설계할 것인가?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="trust" class="panel">
+        <div class="section-card">
+          <h2>4. 의심 해소 — 리뷰와 신뢰</h2>
+          <ul class="question-list">
+            <li>최근 리뷰가 과거 악평을 얼마나 덮고 있는가?</li>
+            <li>리뷰 이벤트의 체감가치를 높이면서 원가를 낮추는 최적 보상은?</li>
+            <li>추천순 리뷰에 달린 답글이 전환에 유의미한 영향을 주는가?</li>
+            <li>실제 방문 리뷰를 가장 자연스럽게 늘리는 방법은?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="cart" class="panel">
+        <div class="section-card">
+          <h2>5. 장바구니 — 후보에 올리고 구매 직전까지</h2>
+          <ul class="question-list">
+            <li>네이버 예약 구조가 실제 좌석 운영과 맞물려 가장 효율적으로 설계되어 있는가?</li>
+            <li>전화·톡톡·예약·길찾기 중 실제 구매 직전 행동을 무엇으로 볼 것인가?</li>
+            <li>단체·가족·기념일 고객이 예약 전 반드시 확인하는 정보는 무엇인가?</li>
+            <li>저장하기·길찾기·예약완료를 광고그룹별로 추적할 수 있는가?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="kakao" class="page"><div class="placeholder">카카오 챕터 — 다음 대화에서 채움</div></section>
+    <section id="daangn" class="page"><div class="placeholder">당근 챕터 — 다음 대화에서 채움</div></section>
+    <section id="google" class="page"><div class="placeholder">구글 챕터 — 다음 대화에서 채움</div></section>
+    <section id="instagram" class="page"><div class="placeholder">인스타그램 챕터 — 다음 대화에서 채움</div></section>
+    <section id="reserve" class="page"><div class="placeholder">캐치테이블 / 테이블링 챕터 — 다음 대화에서 채움</div></section>
+    <section id="third" class="page"><div class="placeholder">티맵 / 다이닝코드 / 식신 / 뽈레 챕터 — 다음 대화에서 채움</div></section>
+  </main>
+</div>
+
+<script>
+function openPage(id){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>openPage(btn.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',()=>openPage(btn.dataset.go)));
+
+document.querySelectorAll('#naver .step').forEach(step=>{
+  step.addEventListener('click',()=>{
+    document.querySelectorAll('#naver .step').forEach(x=>x.classList.remove('active'));
+    step.classList.add('active');
+    document.querySelectorAll('#naver .panel').forEach(x=>x.classList.remove('active'));
+    document.getElementById(step.dataset.step).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.resolved-item').forEach(item=>{
+  const id = item.dataset.resolvedId;
+  const btn = item.querySelector('.checkbtn');
+  const saved = localStorage.getItem('resolved:'+id);
+  if(saved === 'open') item.classList.remove('collapsed');
+
+  btn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    item.classList.toggle('collapsed');
+    const open = !item.classList.contains('collapsed');
+    localStorage.setItem('resolved:'+id, open ? 'open' : 'closed');
+  });
+
+  item.addEventListener('click',()=>{
+    item.classList.toggle('collapsed');
+    const open = !item.classList.contains('collapsed');
+    localStorage.setItem('resolved:'+id, open ? 'open' : 'closed');
+  });
+});
+
+</script>
+</body>
+</html>
